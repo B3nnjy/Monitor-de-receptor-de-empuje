@@ -87,7 +87,7 @@ def init_plot():
 
 if __name__ == "__main__":
     
-    serial_thread = threading.Thread(target=serial_reader, args=(data_queue, ),daemon=True)
+    serial_thread = threading.Thread(target=serial_reader_simulado, args=(data_queue, ),daemon=True)
     serial_thread.start()
     
     
