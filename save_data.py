@@ -1,14 +1,20 @@
-import json
+import csv
+from datetime import datetime
 
 def guardar_datos(data_queue):
-    datos_guardados = []
-    
-    for tiempo, empuje in data_queue:
-        nuevo_dato = {
-            "tiempo": str(tiempo),
-            "empuje": str(empuje)
-        }
-        datos_guardados.append(nuevo_dato)
-    
-    with open("datos.json", "w") as f:
-        json.dump(datos_guardados, f, indent=4)
+    if not data_queue:
+        print("La lista de datos está vacía. No se guardará ningún archivo.")
+        return
+
+    # Obtener timestamp para el nombre del archivo
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    nombre_archivo = f"datos_{timestamp}.csv"
+
+    with open(nombre_archivo, "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(["tiempo", "empuje"])  # Escribir encabezados
+
+        for tiempo, empuje in data_queue:
+            writer.writerow([tiempo, empuje])
+
+    print(f"Datos guardados en: {nombre_archivo}")

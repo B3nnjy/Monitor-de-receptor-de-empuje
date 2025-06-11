@@ -92,7 +92,7 @@ if __name__ == "__main__":
     
     
     ani = FuncAnimation(fig, update, init_func=init_plot, 
-                        interval=50, blit=False, save_count=100)
+                        interval=50, blit=False)
     
     try:
         plt.show()
